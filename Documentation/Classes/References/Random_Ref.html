@@ -1,0 +1,200 @@
+<html>
+<body>
+
+<h1>Random</h1>
+
+<p>Version 2.1: Written by Gregor N. Purdy.</p>
+
+<p>Copyright &copy; 1991-2004 Gregor N. Purdy. All rights reserved.</p>
+
+<p>INHERITS FROM	Object</p>
+
+<h2>CLASS DESCRIPTION</h2>
+
+<p>The Random class provides services for random number generation. It uses an instance of a subclass of RandomEngine as a source for sequences of random bits (in byte-sized chunks).</p>
+
+<p>This class is part of Version 2.1 of Random, distributed 2004 May 01.</p>
+
+<p>Gregor N. Purdy</p>
+
+<p>gregor@focusresearch.com</p>
+
+<h2>INSTANCE VARIABLES</h2>
+
+<p><i>Declared in Random</i></p>
+
+<p>id	engineClass;</p>
+
+<p>ulong	unit;</p>
+
+<p>uchar	bitbuffer;</p>
+
+<p>uchar	*bytebuffer;</p>
+
+<p>uchar	curbit;</p>
+
+<p>ulong	curbyte;</p>
+
+<p>id	engine;</p>
+
+<p>engineClass 	The id of the class of our random bit source</p>
+
+<p>unit 	How many bytes of random bits we get for each request of engine</p>
+
+<p>bitbuffer	One byte worth of bits for use in random booleans</p>
+
+<p>bytebuffer 	A buffer our engine will fill when empty from which we grab bytes</p>
+
+<p>curbit 	The current bit in bitbuffer ready to be used</p>
+
+<p>curbyte 	The current byte bytebuffer ready to be used</p>
+
+<p>engine 	The id of our engine instance</p>
+
+<h2>METHOD TYPES</h2>
+
+<p>Creating and freeing instances	+ alloc</p>
+
+<p>- free</p>
+
+<p>Getting the class version	+ version</p>
+
+<p>Initializing a new instance	- initEngineClass:</p>
+
+<p>- initEngineInstance:</p>
+
+<p>Getting random numbers	- bool</p>
+
+<p>- percent</p>
+
+<p>- rand</p>
+
+<p>- randFunc:</p>
+
+<p>- randMax:</p>
+
+<p>- randMin:max:</p>
+
+<p>Archiving	- read:</p>
+
+<p>- write:</p>
+
+<p>CLASS METHODS</p>
+
+<p><b>alloc</b></p>
+
+<p>+ alloc</b></p>
+
+<p>Returns a new uninitialized instance.</p>
+
+<p><b>version</b></p>
+
+<p>+ version</b></p>
+
+<p>Returns the version number of this class, currently 3.</p>
+
+<h2>INSTANCE METHODS</h2>
+
+<p><b>bool</b></p>
+
+<p>- (BOOL)bool</i></p>
+
+<p>Returns a random Boolean value.</p>
+
+<p><b>free</b></p>
+
+<p>- </i>free</b></p>
+
+<p>Frees the memory occupied by the Random instance and returns nil</b>.</p>
+
+<p><b>initEngineClass:</b></p>
+
+<p>- initEngineClass:</b><i>aClass</b></p>
+
+<p>Initializes the Random with a newly allocated instance of the class </b>aClass </i>as its engine.</p>
+
+<p>See also:  ± <b>initEngineInstance:</b></p>
+
+<p><b>initEngineInstance:</b></p>
+
+<p>- initEngineInstance:</b><i>anObject</i></p>
+
+<p>Initializes the Random with the anObject</i> as its engine. <i>anObject</i> must be an instance of a subclass of RandomEngine. It is an error to pass in an object which is not.</p>
+
+<p>See also:  ± <b>initEngineClass:</b></p>
+
+<p><b>percent</b></p>
+
+<p>- (double)percent</i></p>
+
+<p>Returns a double in the range [0.0, 1.0].</p>
+
+<p><b>rand</b></p>
+
+<p>- (int)</i>rand</i></p>
+
+<p>Returns an int in the range [0, RAND_RANGE]. RAND_RANGE is the maximum unsigned long integer value possible.</p>
+
+<p><b>randFunc:</b></p>
+
+<p>- (double)</i>randFunc:</b>(ddfunc)<i>func</i></p>
+
+<p>Returns a double which is the result of applying the function func</i> to a random percentage.</p>
+
+<p>This is useful for transforming the uniform random numbers Random returns into a non-uniform distribution of your choice.</p>
+
+<p><b>randMax:</b></p>
+
+<p>- (int)randMax:</b>(int)<i>max</i></p>
+
+<p>Returns an int in the range [0, max</i>].</p>
+
+<p><b>randMin: max:</b></p>
+
+<p>- (int)randMin:</b>(int)<i>min <b></i>max:</b>(int)<i>max</i></p>
+
+<p>Returns an int in the range [min</i>, <i>max</i>].</p>
+
+<p><b>read:</b></p>
+
+<p>- read:</b>(NXTypedStream *)<i>stream</i></p>
+
+<p>Unarchives a Random from stream</i>.</p>
+
+<p>See also:  - <b>write:</b></p>
+
+<p><b>write:</b></p>
+
+<p>- write:</b>(NXTypedStream *)<i>stream</i></p>
+
+<p>Archives a Random to stream</i>.</p>
+
+<p>See also:  - <b>read:</b></p>
+
+<h2>DEFINED TYPES</h2>
+
+<p>/* Double Function Returning Double */</p>
+
+<p>typedef double (*ddfunc)(double);</p>
+
+
+<hr/>
+<pre>
+    This file is part of Random.
+
+    Random is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    Random is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Random; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+</pre>
+</body>
+</html>

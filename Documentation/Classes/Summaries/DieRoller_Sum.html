@@ -1,0 +1,52 @@
+<html>
+<body>
+
+<h1>DieRoller</h1>
+
+<p>Version 2.1: Written by Gregor N. Purdy.</p>
+
+<p>Copyright &copy; 1991-2004 Gregor N. Purdy. All rights reserved.</p>
+
+<p>DieRoller : Random : Object</p>
+
+<p><b>Creating and Freeing Instances</b></p>
+
+<p>+ alloc</b>	Allocates and returns a new instance</p>
+
+<p>- <b>free</b>	Frees an instance</p>
+
+<p><b>Rolling Dice</b></p>
+
+<p>- (int)rollBest:</b>(int)<i>want<b></i> of:</b>(int)<i>rolls<b></i> die:</b>(int)<i>sides</i>	Returns the sum of the best <i>want</i> out of <i>rolls</i> rolls of <i>sides</i>-sided dice</i></p>
+
+<p>- (int)<b></i>roll:</b>(int)<i>rolls<b></i> die:</b>(int)<i>sides</i>	Returns the sum of  <i>rolls</i> rolls of a <i>sides</i>-sided die</i></p>
+
+<p>- (int)<b></i>rollDie:</b>(int)<i>sides</i>	Returns the result of rolling a <i>sides</i>-sided die</i></p>
+
+<p><b>Archiving</b></p>
+
+<p>- </i>read:</b>(NXTypedStream *)<i>stream</i>	Reads a DieRoller from <i>stream</i></p>
+
+<p>- <b></i>write:</b>(NXTypedStream *)<i>stream</i>	Writes a DieRoller to <i>stream</i></p>
+
+
+<hr/>
+<pre>
+    This file is part of Random.
+
+    Random is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    Random is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Random; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+</pre>
+</body>
+</html>

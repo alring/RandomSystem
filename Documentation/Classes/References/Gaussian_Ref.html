@@ -1,0 +1,144 @@
+<html>
+<body>
+
+<h1>Gaussian</h1>
+
+<p>Version 2.1: Written by Gregor N. Purdy.</p>
+
+<p>Copyright &copy; 1991-2004 Gregor N. Purdy. All rights reserved.</p>
+
+<p>INHERITS FROM	Random</p>
+
+<h2>CLASS DESCRIPTION</h2>
+
+<p>The Gaussian class provides Gaussian random variables.</p>
+
+<p>This class is part of Version 2.1 of Random, distributed 2004 May 01.</p>
+
+<p>Gregor N. Purdy</p>
+
+<p>gregor@focusresearch.com</p>
+
+<h2>INSTANCE VARIABLES</h2>
+
+<p><i>Declared in Gaussian</i></p>
+
+</p>BOOL	iset;</p>
+
+<p>double	gset;</p>
+
+<p>double	gscale;</p>
+
+<p>double	gorigin;</p>
+
+<p>iset 	Flag indicating absence or presence of saved value</p>
+
+<p>gset 	Saved value, if any</p>
+
+<p>gscale	The scaling factor for the numbers</p>
+
+<p>gorigin 	The point around which the distribution will be centered</p>
+
+<h2>METHOD TYPES</h2>
+
+<p>Creating and freeing instances	+ alloc</p>
+
+<p>- free</p>
+
+<p>Getting and setting parameters	- gOrigin</p>
+
+<p>- gScale</p>
+
+<p>- setGOrigin:</p>
+
+<p>- setGScale:</p>
+
+<p>Getting a Gaussian random variable	- gaussian</p>
+
+<p>Archiving	- read:</p>
+
+<p>- write:</p>
+
+<h2>CLASS METHODS</h2>
+
+<p><b>alloc</b></p>
+
+<p>+ alloc</b></p>
+
+<p>Returns a new uninitialized instance.</p>
+
+<h2>INSTANCE METHODS</h2>
+
+<p><b>free</b></p>
+
+<p>- free</b></p>
+
+<p>Frees the memory occupied by the Gaussian instance and returns nil</b>.</p>
+
+<p><b>gaussian</b></p>
+
+<p>- (double)gaussian</i></p>
+
+<p>Returns one random Gaussian value.</p>
+
+<p><b>gOrigin</b></p>
+
+<p>- (double)</i>gOrigin</i></p>
+
+<p>Returns the center of the Gaussian distribution.</p>
+
+<p><b>gScale</b></p>
+
+<p>- (double)</i>gScale</i></p>
+
+<p>Returns the spread of the Gaussian distribution.</p>
+
+<p><b>read:</b></p>
+
+<p>- </i>read:</b>(NXTypedStream *)<i>stream</i></p>
+
+<p>Unarchives a DieRoller from stream</i>.</p>
+
+<p>See also:  - <b>write:</b></p>
+
+<p><b>setGOrigin:</b></p>
+
+<p>- setGOrigin:</b>(double)<i>anOrigin</i></p>
+
+<p>Sets the center of the Gaussian distribution to anOrigin</i>.</p>
+
+<p><b>setGScale:</b></p>
+
+<p>- setGOrigin:</b>(double)<i>aScale</i></p>
+
+<p>Sets the spread of the Gaussian distribution to aScale</i>.</p>
+
+<p><b>write:</b></p>
+
+<p>- write:</b>(NXTypedStream *)<i>stream</i></p>
+
+<p>Archives a DieRoller to stream</i>.</p>
+
+<p>See also:  - <b>read:</b></p>
+
+
+<hr/>
+<pre>
+    This file is part of Random.
+
+    Random is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    Random is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Random; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+</pre>
+</body>
+</html>

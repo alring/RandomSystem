@@ -1,0 +1,108 @@
+<html>
+<body>
+
+<h1>DieRoller</h1>
+
+<p>Version 2.1: Written by Gregor N. Purdy.</p>
+
+<p>Copyright &copy; 1991-2004 Gregor N. Purdy. All rights reserved.</p>
+
+<p>INHERITS FROM	Random</p>
+
+<h2>CLASS DESCRIPTION</h2>
+
+<p>The DieRoller class provides services for rolling dice.</p>
+
+<p>This class is part of Version 2.1 of Random, distributed 2004 May 01.</p>
+
+<p>Gregor N. Purdy</p>
+
+<p>gregor@focusresearch.com</p>
+
+<h2>METHOD TYPES</h2>
+
+<p>Creating and freeing instances	+ alloc</p>
+
+<p>- free</p>
+
+<p>Getting die rolls	- rollBest:of:die:</p>
+
+<p>- roll:die:</p>
+
+<p>- rollDie:</p>
+
+<p>Archiving	- read:</p>
+
+<p>- write:</p>
+
+<h2>CLASS METHODS</h2>
+
+<p><b>alloc</b></p>
+
+<p>+ alloc</b></p>
+
+<p>Returns a new uninitialized instance.</p>
+
+<h2>INSTANCE METHODS</h2>
+
+<p><b>free</b></p>
+
+<p>- free</b></p>
+
+<p>Frees the memory occupied by the DieRoller instance and returns nil</b>.</p>
+
+<p><b>rollBest:of:die:</b></p>
+
+<p>- (int)rollBest:</b>(int)<i>numWanted<b></i> of:</b>(int)<i>numRolls<b></i> die:</b>(int)<i>numSides</b></p>
+
+<p>Returns the sum of the best </b>numWanted</i> out of <i>numRolls</i> rolls of dice with <i>numSides</i> sides.</p>
+
+<p><b>roll:die:</b></p>
+
+<p>- (int)roll:</b>(int)<i>numRolls<b></i> die:</b>(int)<i>numSides</i></p>
+
+<p>Returns the sum of numRolls</i> rolls of dice with <i>numSides</i> sides.</p>
+
+<p><b>rollDie:</b></p>
+
+<p>- (int)rollDie:</b>(int)<i>numSides</i></p>
+
+<p>Returns the result of rolling a die with numSides</i> sides.</p>
+
+<p><b>read:</b></p>
+
+<p>- read:</b>(NXTypedStream *)<i>stream</i></p>
+
+<p>Unarchives a DieRoller from stream</i>.</p>
+
+<p>See also:  - <b>write:</b></p>
+
+<p><b>write:</b></p>
+
+<p>- write:</b>(NXTypedStream *)<i>stream</i></p>
+
+<p>Archives a DieRoller to stream</i>.</p>
+
+<p>See also:  - <b>read:</b></p>
+
+
+<hr/>
+<pre>
+    This file is part of Random.
+
+    Random is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    Random is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Random; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+</pre>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<html>
+<body>
+
+<h1>StandardEngine</h1>
+
+<p>Version 2.1: Written by Gregor N. Purdy.</p>
+
+<p>Copyright &copy; 1991-2004 Gregor N. Purdy. All rights reserved.</p>
+
+<p>INHERITS FROM	RandomEngine</p>
+
+<h2>CLASS DESCRIPTION</h2>
+
+<p>The StandardEngine class is a wrapper for the standard C/UNIX rand() and srand() functions supplied on the NeXT computer. An instance of the StandardEngine class can be a source of pseudorandom bits usable by the Random class.</p>
+
+<p>Note that rand() generates only 31 pseudo-random bits per call and the Random class expects multiples of 8 bits. Rather than throw away 7 of the 31 bits (to leave 24), StandardEngine generates 32 words (each with 31 pseudo-random bits). One of those words is used as a source of high-order bits for the other 31. So, StandardEngine generates a unit of 31 words or 124 bytes at a shot. </p>
+
+<p>This class is part of Version 2.1 of Random, distributed 2004 May 01.</p>
+
+<p>Gregor N. Purdy</p>
+
+<p>gregor@focusresearch.com</p>
+
+<h2>METHOD TYPES</h2>
+
+<p>Creating and freeing instances	+ alloc</p>
+
+<p>- free</p>
+
+<p>Generation of random bits	- makeRandom:</p>
+
+<p>+ unit</p>
+
+<p>Archiving	- read:</p>
+
+<p>- write:</p>
+
+<h2>CLASS METHODS</h2>
+
+<p><b>alloc</b></p>
+
+<p>+ alloc</b></p>
+
+<p>Returns a new uninitialized instance.</p>
+
+<p><b>unit</b></p>
+
+<p>+ (int)unit</b></p>
+
+<p>Returns the number of bytes each invocation of makeRandom:</b> will produce. For StandardEngine, this is 124.</p>
+
+<h2>INSTANCE METHODS</h2>
+
+<p><b>free</b></p>
+
+<p>- free</b></p>
+
+<p>Frees the memory occupied by the StandardEngine instance and returns nil</b>.</p>
+
+<p><b>makeRandom:</b></p>
+
+<p>- makeRandom:</b>(uchar *)<i>storage</b></p>
+
+<p>Makes 32 calls to rand(), and stuffs the results into </b>storage</i> (note that only 31 words of pseudo-random bits are generated).</p>
+
+<p><b>read:</b></p>
+
+<p>- read:</b>(NXTypedStream *)<i>stream</i></p>
+
+<p>Unarchives a StandardEngine from stream</i>.</p>
+
+<p>See also:  - <b>write:</b></p>
+
+<p><b>write:</b></p>
+
+<p>- write:</b>(NXTypedStream *)<i>stream</i></p>
+
+<p>Archives a StandardEngine to stream</i>.</p>
+
+<p>See also:  - <b>read:</b></p>
+
+
+<hr/>
+<pre>
+    This file is part of Random.
+
+    Random is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    Random is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Random; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+</pre>
+</body>
+</html>

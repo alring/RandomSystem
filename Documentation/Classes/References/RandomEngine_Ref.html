@@ -1,0 +1,100 @@
+<html>
+<body>
+
+<h1>RandomEngine</h1>
+
+<p>Version 2.1: Written by Gregor N. Purdy.</p>
+
+<p>Copyright &copy; 1991-2004 Gregor N. Purdy. All rights reserved.</p>
+
+<p>INHERITS FROM	Object</p>
+
+<h2>CLASS DESCRIPTION</h2>
+
+<p>The RandomEngine class is an abstract superclass for the types of classes usable by the Random class. An instance of a RandomEngine subclass is a source of pseudorandom bits usable by the Random class.</p>
+
+<p>This class is part of Version 2.1 of Random, distributed 2004 May 01.</p>
+
+<p>Gregor N. Purdy</p>
+
+<p>gregor@focusresearch.com</p>
+
+<h2>METHOD TYPES</h2>
+
+<p>Creating and freeing instances	+ alloc</p>
+
+<p>- free</p>
+
+<p>Generation of random bits	- makeRandom:</p>
+
+<p>+ unit</p>
+
+<p>Archiving	- read:</p>
+
+<p>- write:</p>
+
+<h2>CLASS METHODS</h2>
+
+<p><b>alloc</b></p>
+
+<p>+ alloc</b></p>
+
+<p>Returns a new uninitialized instance.</p>
+
+<p><b>unit</b></p>
+
+<p>+ (int)unit</b></p>
+
+<p>Returns the number of bytes each invocation of makeRandom:</b> will produce.</p>
+
+<h2>INSTANCE METHODS</h2>
+
+<p><b>free</b></p>
+
+<p>- free</b></p>
+
+<p>Frees the memory occupied by the RandomEngine instance and returns nil</b>.</p>
+
+<p><b>makeRandom:</b></p>
+
+<p>- makeRandom:</b>(uchar *)<i>storage</b></p>
+
+<p>It is the subclass' responsibility to implement this method. The subclass should store the number of bytes returned by the </i>unit</b> method into the buffer pointed to by <i>storage</i>.</p>
+
+<p><b>read:</b></p>
+
+<p>- read:</b>(NXTypedStream *)<i>stream</i></p>
+
+<p>Unarchives a RandomEngine from stream</i>.</p>
+
+<p>See also:  - <b>write:</b></p>
+
+<p><b>write:</b></p>
+
+<p>- write:</b>(NXTypedStream *)<i>stream</i></p>
+
+<p>Archives a RandomEngine to stream</i>.</p>
+
+<p>See also:  - <b>read:</b></p>
+
+
+<hr/>
+<pre>
+    This file is part of Random.
+
+    Random is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    Random is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Random; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+</pre>
+</body>
+</html>

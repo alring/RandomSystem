@@ -1,0 +1,116 @@
+<html>
+<body>
+
+<h1>R250Engine</h1>
+
+<p>Version 2.1: Written by Gregor N. Purdy.</p>
+
+<p>Copyright &copy; 1991-2004 Gregor N. Purdy. All rights reserved.</p>
+
+<p>INHERITS FROM	RandomEngine</p>
+
+<h2>CLASS DESCRIPTION</h2>
+
+<p>The R250Engine class implements a random number generator that is reasonably fast.</p>
+
+<p>The algorithm used by the R250Engine class is that given in the article:</p>
+
+<p> 	"A Fast Pseudo Random Number Generator" by W.L. Maier</p>
+
+<p>	Dr. Dobb's Journal, 1991 May, Page 152.</p>
+
+<p>	Published By:</p>
+
+<p>		M&amp;T Publishing, Inc.</p>
+
+<p>		501 Galveston Drive</p>
+
+<p>		Redwood City, CA 94063</p>
+
+<p>		415-366-3600</p>
+
+<p>This class is part of Version 2.1 of Random, distributed 2004 May 01.</p>
+
+<p>Gregor N. Purdy</p>
+
+<p>gregor@focusresearch.com</p>
+
+<h2>METHOD TYPES</h2>
+
+<p>Creating and freeing instances	+ alloc</p>
+
+<p>- free</p>
+
+<p>Generation of random bits	- makeRandom:</p>
+
+<p>+ unit</p>
+
+<p>Archiving	- read:</p>
+
+<p>- write:</p>
+
+<h2>CLASS METHODS</h2>
+
+<p><b>alloc</b></p>
+
+<p>+ alloc</b></p>
+
+<p>Returns a new uninitialized instance.</p>
+
+<p><b>unit</b></p>
+
+<p>+ (int)unit</b></p>
+
+<p>Returns the number of bytes each invocation of makeRandom:</b> will produce. For R250Engine, this is 4.</p>
+
+<h2>INSTANCE METHODS</h2>
+
+<p><b>free</b></p>
+
+<p>- free</b></p>
+
+<p>Frees the memory occupied by the R250Engine instance and returns nil</b>.</p>
+
+<p><b>makeRandom:</b></p>
+
+<p>- makeRandom:</b>(uchar *)<i>storage</b></p>
+
+<p>Iterates once through the R250 algorithm, and stuffs the results into </b>storage</i>.</p>
+
+<p><b>read:</b></p>
+
+<p>- read:</b>(NXTypedStream *)<i>stream</i></p>
+
+<p>Unarchives an R250Engine from stream</i>.</p>
+
+<p>See also:  - <b>write:</b></p>
+
+<p><b>write:</b></p>
+
+<p>- write:</b>(NXTypedStream *)<i>stream</i></p>
+
+<p>Archives an R250Engine to stream</i>.</p>
+
+<p>See also:  - <b>read:</b></p>
+
+
+<hr/>
+<pre>
+    This file is part of Random.
+
+    Random is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    Random is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Random; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+</pre>
+</body>
+</html>
