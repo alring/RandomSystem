@@ -1,6 +1,8 @@
 //
 // Gaussian
 //
+// $Id: Gaussian.m,v 1.2 2004/05/04 14:09:39 gregor Exp $
+//
 // Copyright (C) 1992-2004 Gregor N. Purdy. All rights reserved.
 //
 // This file is part of Random.
@@ -21,9 +23,9 @@
 //
 
 
-#import "Gaussian.h"
-#import <math.h>
-#import <stdio.h>
+#include "Gaussian.h"
+#include <math.h>
+#include <stdio.h>
 
 
 @implementation Gaussian
@@ -128,11 +130,11 @@
 // read:
 //
 
-- read:(NXTypedStream *)stream
+- read:(TypedStream *)stream
 {
     [super read:stream];
     
-    NXReadTypes(stream, "iddd", &iset, &gset, &gscale, &gorigin);
+    objc_read_types(stream, "iddd", &iset, &gset, &gscale, &gorigin);
     
     return self;
 }
@@ -142,11 +144,11 @@
 // write:
 //
 
-- write:(NXTypedStream *)stream
+- write:(TypedStream *)stream
 {
     [super write:stream];
     
-    NXWriteTypes(stream, "iddd", &iset, &gset, &gscale, &gorigin);
+    objc_write_types(stream, "iddd", &iset, &gset, &gscale, &gorigin);
 
     return self;
 }

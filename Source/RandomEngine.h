@@ -4,6 +4,8 @@
 // An abstract Objective-C class for random number
 // generator engines.
 //
+// $Id: RandomEngine.h,v 1.2 2004/05/04 14:09:39 gregor Exp $
+//
 // Copyright (C) 1992-2004 Gregor N. Purdy. All rights reserved.
 //
 // This file is part of Random.
@@ -23,8 +25,10 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
+#ifndef _H_RandomEngine
+#define _H_RandomEngine
 
-#import <objc/Object.h>
+#include <objc/Object.h>
 
 
 //
@@ -50,6 +54,8 @@ typedef unsigned char	uchar;
 
 @end
 
+
+#endif // _H_RandomEngine
 
 //
 // End of file.

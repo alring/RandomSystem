@@ -17,6 +17,8 @@
 //        Redwood City, CA 94063
 //        415-366-3600
 //
+// $Id: R250Engine.h,v 1.2 2004/05/04 14:09:39 gregor Exp $
+//
 // Copyright (C) 1992-2004 Gregor N. Purdy. All rights reserved.
 //
 // This file is part of Random.
@@ -36,8 +38,10 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
+#ifndef _H_R250Engine
+#define _H_R250Engine
 
-#import "RandomEngine.h"
+#include "RandomEngine.h"
 
 
 @interface R250Engine : RandomEngine
@@ -55,12 +59,13 @@
 
 - makeRandom:(uchar *)storage;
 
-- read:(NXTypedStream *)stream;
-- write:(NXTypedStream *)stream;
+- read:(TypedStream *)stream;
+- write:(TypedStream *)stream;
 
 
 @end
 
+#endif // _H_R250Engine
 
 //
 // End of file.

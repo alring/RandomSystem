@@ -3,6 +3,8 @@
 //
 // This program tests the archiving abilities of the Random System.
 //
+// $Id: TestArchive.m,v 1.2 2004/05/04 14:09:39 gregor Exp $
+//
 // Copyright (C) 1992-2004 Gregor N. Purdy. All rights reserved.
 //
 // This file is part of Random.
@@ -23,12 +25,12 @@
 //
 
 
-#import "Random.h"
-#import "StandardEngine.h"
-#import "ElkinsEngine.h"
-#import "R250Engine.h"
-#import <objc/typedstream.h>
-#import <stdio.h>
+#include "Random.h"
+#include "StandardEngine.h"
+#include "ElkinsEngine.h"
+#include "R250Engine.h"
+#include <objc/typedstream.h>
+#include <stdio.h>
 
 
 //
@@ -37,11 +39,11 @@
 
 void test_archive(id myRand)
 {
-    double		buffer[1000];
-    double		foo;
-    int			i;
-    NXTypedStream	*myStream;
-    id			myNewRand;
+    double                buffer[1000];
+    double                temp;
+    int                        i;
+    TypedStream        *myStream;
+    id                        myNewRand;
     
     //
     // Skip 1000 numbers
@@ -50,7 +52,7 @@ void test_archive(id myRand)
     printf("  Generating 1000 percentages...\n");
     
     for(i = 0; i < 1000; i++) {
-    	foo = [myRand percent];
+        temp = [myRand percent];
     }
     
     //
@@ -59,9 +61,9 @@ void test_archive(id myRand)
     
     printf("  Archiving the random object to the file 'ArchivedRandom.rand'...\n");
     
-    myStream = NXOpenTypedStreamForFile("ArchivedRandom.rand", NX_WRITEONLY);
+    myStream = objc_open_typed_stream_for_file("ArchivedRandom.rand", OBJC_WRITEONLY);
     [myRand write:myStream];
-    NXCloseTypedStream(myStream);
+    objc_close_typed_stream(myStream);
     
     //
     // Generate and save a bunch of numbers:
@@ -79,9 +81,9 @@ void test_archive(id myRand)
     
     printf("  Reading a copy of the archive from the file 'ArchivedRandom.rand'...\n");
     
-    myStream = NXOpenTypedStreamForFile("ArchivedRandom.rand", NX_READONLY);
+    myStream = objc_open_typed_stream_for_file("ArchivedRandom.rand", OBJC_READONLY);
     myNewRand = [[Random alloc] read:myStream];
-    NXCloseTypedStream(myStream);
+    objc_close_typed_stream(myStream);
     
     //
     // Create 1000 more numbers, and compare them:
@@ -90,10 +92,11 @@ void test_archive(id myRand)
     printf("  Creating and comparing 1000 percentages to previous results...\n");
     
     for(i = 0; i < 1000; i++) {
-    	if(buffer[i] != [myNewRand percent]) {
-	    printf(">> Sequence diverged at %d!\n", i);
-	    break;
-	}
+        double temp = [myNewRand percent];
+        if(buffer[i] != temp) {
+            printf(">> Sequence diverged at index %d (expected %g; got %g)!\n", i, buffer[i], temp);
+            break;
+        }
     }
     
     //

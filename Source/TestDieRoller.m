@@ -1,6 +1,8 @@
 //
 // TestDieRoller
 //
+// $Id: TestDieRoller.m,v 1.2 2004/05/04 14:09:39 gregor Exp $
+//
 // Copyright (C) 1992-2004 Gregor N. Purdy. All rights reserved.
 //
 // This file is part of Random.
@@ -21,10 +23,10 @@
 //
 
 
-#import "DieRoller.h"
-#import "ElkinsEngine.h"
-#import <stdio.h>
-#import <stdlib.h>
+#include "DieRoller.h"
+#include "ElkinsEngine.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 
 #define SAMPLES		100000
@@ -49,7 +51,7 @@ int test_dieroller(id roller)
     for(i = 0; i < SAMPLES; i++)
 	(results[[roller rollDie:20] - 1])++;
     for(i = 0; i < 20; i++)
-        printf("%2d: %d (%f%%)\n", i + 1, results[i], (double)results[i] / (double)SAMPLES * 100);
+        printf("%2d: %ld (%f%%)\n", i + 1, results[i], (double)results[i] / (double)SAMPLES * 100);
     
     printf("\n\n");
     

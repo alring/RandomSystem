@@ -8,6 +8,8 @@
 // The StandardEngine class is a wrapper for the standard C/UNIX
 // rand() and srand() functions supplied on the NeXT computer.
 //
+// $Id: StandardEngine.h,v 1.2 2004/05/04 14:09:39 gregor Exp $
+//
 // Copyright (C) 1992-2004 Gregor N. Purdy. All rights reserved.
 //
 // This file is part of Random.
@@ -27,8 +29,10 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
+#ifndef _H_StandardEngine
+#define _H_StandardEngine
 
-#import "RandomEngine.h"
+#include "RandomEngine.h"
 
 
 @interface StandardEngine : RandomEngine
@@ -45,12 +49,13 @@
 
 - makeRandom:(uchar *)storage;
 
-- read:(NXTypedStream *)stream;
-- write:(NXTypedStream *)stream;
+- read:(TypedStream *)stream;
+- write:(TypedStream *)stream;
 
 
 @end
 
+#endif // _H_StandardEngine
 
 //
 // End of file.

@@ -1,6 +1,8 @@
 //
 // ElkinsEngine
 //
+// $Id: ElkinsEngine.m,v 1.2 2004/05/04 14:09:39 gregor Exp $
+//
 // Copyright (C) 1992-2004 Gregor N. Purdy. All rights reserved.
 //
 // This file is part of Random.
@@ -21,9 +23,9 @@
 //
 
 
-#import "ElkinsEngine.h"
-#import <sys/time.h>
-#import <stdio.h>
+#include "ElkinsEngine.h"
+#include <sys/time.h>
+#include <stdio.h>
 
 
 //
@@ -189,12 +191,11 @@
     return self;
 }
 
-
 //
 // read:
 //
 
-- read:(NXTypedStream *)stream
+- read:(TypedStream *)stream
 {
     int		t1;			// Stuff h's into ints for temporary.
     int		t2;
@@ -202,7 +203,7 @@
     
     [super read:stream];
     
-    NXReadTypes(stream, "iii", &t1, &t2, &t3);
+    objc_read_types(stream, "iii", &t1, &t2, &t3);
     
     h1 = (ushort)t1;
     h2 = (ushort)t2;
@@ -216,7 +217,7 @@
 // write:
 //
 
-- write:(NXTypedStream *)stream
+- write:(TypedStream *)stream
 {
     int		t1 = (int)h1;		// Stuff h's into ints for temporary.
     int		t2 = (int)h2;
@@ -224,11 +225,10 @@
     
     [super write:stream];
     
-    NXWriteTypes(stream, "iii", &t1, &t2, &t3);
+    objc_write_types(stream, "iii", &t1, &t2, &t3);
 
     return self;
 }
-
 
 @end
 

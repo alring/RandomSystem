@@ -1,41 +1,15 @@
 //
 // Random
 //
-// An Objective-C class for NeXT computers to provide services for random
-// number generation.
-//
-// History:
-//   pre 1990 Mar 23
-//     Used random number generation algorithm from K&R.
-//   1990 Mar 23
-//     Modified to use algorithm with cycle length of 8.8 trillion.
-//   1990 Mar 26
-//     * Added archiving.
-//     * Added randMax:, randMin:Max:, and percent:.
-//   1991 Apr 26
-//     * Changed to use +alloc and -init as all NeXTStep 2.0 objects should.
-//   1991 May 30
-//     * Prepared for distribution and initial release.
-//   1991 Nov 05
-//     * Added - (BOOL)bool method.
-//   1991 Dec 30
-//     * Changed - (float)percent to return double instead.
-//     * Added - (double)randFunc: method.
-//   1992 Feb 27
-//     * Added Gaussian functionality.
-//   1992 Apr 02
-//     * New version, 2.0.
-//     * New Architecture: Split generation/interpretation.
-//   2004 May 01
-//     * License change to GPL.
-//
-// Version 2.1, 2004 May 01 
+// An Objective-C class for to provide services for random number generation.
 //
 // Written by Gregor N. Purdy
 // gregor@focusresearch.com
 //
 // See the README file included for information
 // and distribution and usage rights. 
+//
+// $Id: Random.h,v 1.2 2004/05/04 14:09:39 gregor Exp $
 //
 // Copyright (C) 1992-2004 Gregor N. Purdy. All rights reserved.
 //
@@ -57,9 +31,12 @@
 //
 
 
-#import <objc/Object.h>
-#import <objc/typedstream.h>
-#import "RandomEngine.h"
+#ifndef _H_Random
+#define _H_Random
+
+#include <objc/Object.h>
+#include <objc/typedstream.h>
+#include "RandomEngine.h"
 
 
 #define RAND_RANGE	((ulong)0xffffffff)
@@ -97,12 +74,13 @@ typedef double (*ddfunc)(double);			// Double Function Returning Double.
 
 - (double)randFunc:(ddfunc)func;	// See description file.
 
-- read:(NXTypedStream *)stream;		// De-archive from a typed stream.
-- write:(NXTypedStream *)stream;	// Archive to a typed stream.
+- read:(TypedStream *)stream;		// De-archive from a typed stream.
+- write:(TypedStream *)stream;	// Archive to a typed stream.
 
 
 @end
 
+#endif // _H_Random
 
 //
 // End of file.

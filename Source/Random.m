@@ -1,6 +1,8 @@
 //
 // Random
 //
+// $Id: Random.m,v 1.2 2004/05/04 14:09:39 gregor Exp $
+//
 // Copyright (C) 1992-2004 Gregor N. Purdy. All rights reserved.
 //
 // This file is part of Random.
@@ -21,10 +23,20 @@
 //
 
 
-#import "Random.h"
-#import <math.h>
-#import <stdlib.h>
-#import <stdio.h>
+#include "Random.h"
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+//
+// For GCC, the symbol __NEXT_RUNTIME__ is supposed to be defined by default
+// if you are compiling on a MacOS X machine. So, we use absence of that to
+// switch in a new implementation of -percent, which requires this new header.
+//
+
+#ifndef __NEXT_RUNTIME__
+#include <ieee754.h>
+#endif
 
 
 @implementation Random
@@ -136,7 +148,7 @@
 	    curbit = 0;
 	}
     
-	ret = (bitbuffer & (0x01 << curbit) != 0);
+	ret = ( (bitbuffer & (0x01 << curbit)) != 0 );
 	curbit++;
     }
     else if(max <= 0x000000ff) {				// One byte needed.
@@ -217,7 +229,7 @@
 //
 // Nicely enough, there is only 1 byte which is a mix of constant and
 // random bits. So, the trick is to generate 7 bytes of random data, and
-// then to overlay the constant 1111 into the high-order nibble of the
+// then to overlay the constant 1111 into the high-order nybble of the
 // 2nd byte. Then, the first byte is just the constant 00111111.
 //
 // Of course, this is technically platform dependant, which is a no-no,
@@ -288,26 +300,43 @@
 //         Engineers, August 1985.
 // 
 // ------------------------------------------------------------------------
-// 
+//
+// For GCC, the symbol __NEXT_RUNTIME__ is supposed to be defined by default
+// if you are compiling on a MacOS X machine. So, we use that to switch in
+// the old algorithm (which used to work on a NeXT computer). Otherwise, we
+// use a newer approach that works on modern Linux computers (tested on an
+// Intel host running Fedora Core 1).
+//
 
 - (double)percent
 {
-    double	temp;
-    int		i;
-    
-    for(i = 1; i < 8; i++) {
-        if(curbyte == unit) {				// i.e., bytebuffer empty.
-	    [engine makeRandom:bytebuffer];
-	    curbyte = 0;
-	}
-	((uchar *)(&temp))[i] = bytebuffer[curbyte];
-	curbyte++;
+#ifdef __NEXT_RUNTIME__
+    double temp;
+    int    i;
+
+    for (i = 1; i < 8; i++) {
+        if (curbyte == unit) {             // i.e., if bytebuffer empty.
+          [engine makeRandom:bytebuffer];
+          curbyte = 0;
+        }
+        ((uchar *)(&temp))[i] = bytebuffer[curbyte];
+        curbyte++;
     }
-    
+
     ((ulong *)(&temp))[0] &= ((ulong)0x000fffff);
     ((ulong *)(&temp))[0] |= ((ulong)0x3ff00000);
-    
+
     return (temp - 1.0);
+#else
+    union ieee754_double temp;
+
+    temp.ieee.mantissa0 = [self rand];
+    temp.ieee.mantissa1 = [self rand];
+    temp.ieee.exponent  = 0x03ff;
+    temp.ieee.negative  = 0;
+
+    return (temp.d - 1.0);
+#endif
 }
 
 
@@ -329,7 +358,7 @@
 	curbit = 0;
     }
     
-    ret = (bitbuffer & (0x01 << curbit) != 0);
+    ret = ( (bitbuffer & (0x01 << curbit)) != 0 );
     curbit++;
 	    
     return ret;
@@ -350,7 +379,7 @@
 // read:
 //
 
-- read:(NXTypedStream *)stream
+- read:(TypedStream *)stream
 {
     int		i;
     
@@ -360,7 +389,7 @@
     // Read in the engine:
     //
     
-    NXReadTypes(stream, "@", &engine);
+    objc_read_types(stream, "@", &engine);
     
     //
     // Set related instance variables:
@@ -376,13 +405,13 @@
     // Read in the buffers and buffer pointers:
     //
     
-    NXReadTypes(stream, "c", &bitbuffer);
+    objc_read_types(stream, "c", &bitbuffer);
 	
     for(i = 0; i < unit; i++) {
-        NXReadTypes(stream, "c", &(bytebuffer[i]));
+        objc_read_types(stream, "c", &(bytebuffer[i]));
     }
     
-    NXReadTypes(stream, "ii", &curbit, &curbyte);
+    objc_read_types(stream, "ii", &curbit, &curbyte);
     
     return self;
 }
@@ -392,7 +421,7 @@
 // write:
 //
 
-- write:(NXTypedStream *)stream
+- write:(TypedStream *)stream
 {
     int		i;
     
@@ -402,23 +431,22 @@
     // Write out the engine:
     //
     
-    NXWriteTypes(stream, "@", &engine);
+    objc_write_types(stream, "@", &engine);
     
     //
     // Write out the buffers and buffer pointers:
     //
     
-    NXWriteTypes(stream, "c", &bitbuffer);
+    objc_write_types(stream, "c", &bitbuffer);
     
     for(i = 0; i < unit; i++) {
-        NXWriteTypes(stream, "c", &(bytebuffer[i]));
+        objc_write_types(stream, "c", &(bytebuffer[i]));
     }
     
-    NXWriteTypes(stream, "ii", &curbit, &curbyte);
+    objc_write_types(stream, "ii", &curbit, &curbyte);
     
     return self;
 }
-
 
 @end
 

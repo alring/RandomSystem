@@ -1,8 +1,10 @@
 //
-// TestPercent.m
+// TestPercent
 //
 // This program tests the Random classes' abilities to generate
 // random percentages.
+//
+// $Id: TestPercent.m,v 1.2 2004/05/04 14:09:39 gregor Exp $
 //
 // Copyright (C) 1992-2004 Gregor N. Purdy. All rights reserved.
 //
@@ -24,13 +26,13 @@
 //
 
 
-#import "Random.h"
-#import "StandardEngine.h"
-#import "ElkinsEngine.h"
-#import "R250Engine.h"
-#import <math.h>
-#import <stdio.h>
-#import <stdlib.h>
+#include "Random.h"
+#include "StandardEngine.h"
+#include "ElkinsEngine.h"
+#include "R250Engine.h"
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 
 #define DEFAULT_N	10000

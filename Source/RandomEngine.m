@@ -1,6 +1,8 @@
 //
 // RandomEngine
 //
+// $Id: RandomEngine.m,v 1.2 2004/05/04 14:09:39 gregor Exp $
+//
 // Copyright (C) 1992-2004 Gregor N. Purdy. All rights reserved.
 //
 // This file is part of Random.
@@ -21,7 +23,7 @@
 //
 
 
-#import "RandomEngine.h"
+#include "RandomEngine.h"
 
 
 @implementation RandomEngine

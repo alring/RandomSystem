@@ -1,8 +1,10 @@
 //
-// BinTest
+// TestGaussian
 //
 // This program tests the Random classes' abilities to generate
 // random gaussian variables.
+//
+// $Id: TestGaussian.m,v 1.2 2004/05/04 14:09:39 gregor Exp $
 //
 // Copyright (C) 1992-2004 Gregor N. Purdy. All rights reserved.
 //
@@ -24,13 +26,13 @@
 //
 
 
-#import "Gaussian.h"
-#import "StandardEngine.h"
-#import "ElkinsEngine.h"
-#import "R250Engine.h"
-#import <math.h>
-#import <stdio.h>
-#import <stdlib.h>
+#include "Gaussian.h"
+#include "StandardEngine.h"
+#include "ElkinsEngine.h"
+#include "R250Engine.h"
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 
 #define DEFAULT_N	1000

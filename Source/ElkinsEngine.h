@@ -22,6 +22,8 @@
 //        San Francisco, CA 94105
 //        415-397-1881
 //
+// $Id: ElkinsEngine.h,v 1.2 2004/05/04 14:09:39 gregor Exp $
+//
 // Copyright (C) 1992-2004 Gregor N. Purdy. All rights reserved.
 //
 // This file is part of Random.
@@ -41,8 +43,10 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
+#ifndef _H_ElkinsEngine
+#define _H_ElkinsEngine
 
-#import "RandomEngine.h"
+#include "RandomEngine.h"
 
 
 @interface ElkinsEngine : RandomEngine
@@ -70,12 +74,13 @@
 
 - makeRandom:(uchar *)storage;
 
-- read:(NXTypedStream *)stream;
-- write:(NXTypedStream *)stream;
+- read:(TypedStream *)stream;
+- write:(TypedStream *)stream;
 
 
 @end
 
+#endif // _H_ElkinsEngine
 
 //
 // End of file.

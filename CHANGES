@@ -1,0 +1,54 @@
+
+pre 1990 Mar 23
+
+  Used random number generation algorithm from K&R.
+
+1990 Mar 23
+
+  Modified to use algorithm with cycle length of 8.8 trillion.
+
+1990 Mar 26
+
+  * Added archiving.
+  * Added randMax:, randMin:Max:, and percent:.
+
+1991 Apr 26
+
+  * Changed to use +alloc and -init as all NeXTStep 2.0 objects should.
+
+1991 May 30
+
+  * Prepared for distribution and initial release.
+
+1991 Nov 05
+
+  * Added - (BOOL)bool method.
+
+1991 Dec 30
+
+  * Changed - (float)percent to return double instead.
+  * Added - (double)randFunc: method.
+
+1992 Feb 27
+
+  * Added Gaussian functionality.
+
+1992 Apr 02
+
+  * New version, 2.0.
+  * New Architecture: Split generation/interpretation.
+
+2004 May 01
+
+  * New version, 2.1.
+  * License change to GPL.
+
+2004 May 04
+
+  * New version, 2.2
+  * Now works on ix86 Linux (compiles without error, and its tests run)
+  * Removed redundant copies of source files in examples
+  * Ported -read: and -write: methods to use GCC's Objective-C runtime
+    functions (this will probably break on MacOS X -- we are going to
+    need to switch in different archiving code for MacOS X)
+

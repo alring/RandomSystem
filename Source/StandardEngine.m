@@ -1,6 +1,8 @@
 //
 // StandardEngine
 //
+// $Id: StandardEngine.m,v 1.2 2004/05/04 14:09:39 gregor Exp $
+//
 // Copyright (C) 1992-2004 Gregor N. Purdy. All rights reserved.
 //
 // This file is part of Random.
@@ -21,9 +23,9 @@
 //
 
 
-#import "StandardEngine.h"
-#import <sys/time.h>
-#import <stdlib.h>
+#include "StandardEngine.h"
+#include <sys/time.h>
+#include <stdlib.h>
 
 
 @implementation StandardEngine
@@ -111,11 +113,11 @@
 // read:
 //
 
-- read:(NXTypedStream *)stream
+- read:(TypedStream *)stream
 {
     [super write:stream];
     
-    NXReadTypes(stream, "i", &last);
+    objc_read_types(stream, "i", &last);
     srand(last);
     
     return self;
@@ -126,11 +128,11 @@
 // write:
 //
 
-- write:(NXTypedStream *)stream
+- write:(TypedStream *)stream
 {
     [super write:stream];
     
-    NXWriteTypes(stream, "i", &last);
+    objc_write_types(stream, "i", &last);
     
     return self;
 }

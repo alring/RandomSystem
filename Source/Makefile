@@ -1,7 +1,7 @@
 #
 # Random
 #
-# Version 2.1 Makefile.
+# $Id: Makefile,v 1.2 2004/05/04 14:09:39 gregor Exp $
 #
 # Copyright (C) 1992-2004 Gregor N. Purdy. All Rights Reserved.
 #
@@ -27,15 +27,15 @@
 # Macros:
 #
 
-FLAGS	= -g -Wall
-LIBS	= -lNeXT_s -lsys_s
+FLAGS = -g -Wall
+LIBS  = -lobjc -lm
 
 
 #
 # Rules:
 #
 
-.m.o:
+%.o: %.m
 	cc -c ${FLAGS} -o $@ $*.m
 
 
@@ -67,28 +67,38 @@ Random.o: Random.m Random.h RandomEngine.h
 DieRoller.o: DieRoller.m DieRoller.h Random.h
 Gaussian.o: Gaussian.m Gaussian.h Random.h
 
+RANDOM_HDRS = Random.h DieRoller.h Gaussian.h
+RANDOM_OBJS = Random.o DieRoller.o Gaussian.o
+
+
+#
+# Other variables:
+#
+
+ALL_HDRS = ${RANDOM_HDRS} ${ENGINE_HDRS}
+ALL_OBJS = ${RANDOM_OBJS} ${ENGINE_OBJS}
+
 
 #
 # Testing Programs:
 #
 
-TestPercent.o: TestPercent.m Random.h ${ENGINE_HDRS}
-TestDieRoller.o: TestDieRoller.m Random.h DieRoller.h RandomEngine.h ElkinsEngine.h
-TestGaussian.o: TestGaussian.m Random.h Gaussian.h ${ENGINE_HDRS}
-TestArchive.o: TestArchive.m Random.h ${ENGINE_HDRS}
+TestPercent.o: TestPercent.m ${ALL_HDRS}
+TestDieRoller.o: TestDieRoller.m ${ALL_HDRS}
+TestGaussian.o: TestGaussian.m ${ALL_HDRS}
+TestArchive.o: TestArchive.m ${ALL_HDRS}
 
-TestPercent: TestPercent.o Random.o ${ENGINE_OBJS}
-	cc ${FLAGS} -o TestPercent TestPercent.o Random.o ${ENGINE_OBJS} ${LIBS}
+TestPercent: TestPercent.o Random.o ${ALL_OBJS}
+	cc ${FLAGS} -o TestPercent TestPercent.o ${ALL_OBJS} ${LIBS}
 
-TestDieRoller: TestDieRoller.o Random.o DieRoller.o RandomEngine.o ElkinsEngine.o
-	cc ${FLAGS} -o TestDieRoller TestDieRoller.o Random.o DieRoller.o \
-	   RandomEngine.o ElkinsEngine.o ${LIBS}
+TestDieRoller: TestDieRoller.o ${ALL_OBJS}
+	cc ${FLAGS} -o TestDieRoller TestDieRoller.o ${ALL_OBJS} ${LIBS}
 
-TestGaussian: TestGaussian.o Random.o Gaussian.o ${ENGINE_OBJS}
-	cc ${FLAGS} -o TestGaussian TestGaussian.o Random.o Gaussian.o ${ENGINE_OBJS} ${LIBS}
+TestGaussian: TestGaussian.o ${ALL_OBJS}
+	cc ${FLAGS} -o TestGaussian TestGaussian.o ${ALL_OBJS} ${LIBS}
 
-TestArchive: TestArchive.o Random.o ${ENGINE_OBJS}
-	cc ${FLAGS} -o TestArchive TestArchive.o Random.o ${ENGINE_OBJS} ${LIBS}
+TestArchive: TestArchive.o Random.o ${ALL_OBJS}
+	cc ${FLAGS} -o TestArchive TestArchive.o ${ALL_OBJS} ${LIBS}
 
 
 # 
@@ -104,6 +114,7 @@ clean:
 over:
 	@make clean
 	@make
+
 
 #
 # End of file.

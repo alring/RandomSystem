@@ -1,6 +1,8 @@
 //
 // R250Engine
 //
+// $Id: R250Engine.m,v 1.2 2004/05/04 14:09:39 gregor Exp $
+//
 // Copyright (C) 1992-2004 Gregor N. Purdy. All rights reserved.
 //
 // This file is part of Random.
@@ -21,9 +23,9 @@
 //
 
 
-#import "R250Engine.h"
-#import <stdlib.h>
-#import <stdio.h>
+#include "R250Engine.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 
 @implementation R250Engine
@@ -93,21 +95,20 @@
     return self;
 }
 
-
 //
 // read:
 //
 
-- read:(NXTypedStream *)stream
+- read:(TypedStream *)stream
 {
     int		i;
     
     [super write:stream];
     
-    NXReadTypes(stream, "i", &index);
+    objc_read_types(stream, "i", &index);
     
     for(i = 0; i < 250; i++) {
-    	NXReadTypes(stream, "i", &(buffer[i]));
+    	objc_read_types(stream, "i", &(buffer[i]));
     }
     
     return self;
@@ -118,16 +119,16 @@
 // write:
 //
 
-- write:(NXTypedStream *)stream
+- write:(TypedStream *)stream
 {
     int		i;
     
     [super write:stream];
     
-    NXWriteTypes(stream, "i", &index);
+    objc_write_types(stream, "i", &index);
     
     for(i = 0; i < 250; i++) {
-    	NXWriteTypes(stream, "i", &(buffer[i]));
+    	objc_write_types(stream, "i", &(buffer[i]));
     }
     
     return self;

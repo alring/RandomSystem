@@ -1,9 +1,11 @@
-----------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
-Random
+RandomSystem
 
-Version 2.1
-2004 May 01
+Version 2.2
+2004 May 04
+
+http://www.gregorpurdy.com/gregor/RandomSystem/
 
 Written by Gregor N. Purdy
 gregor@focusresearch.com
@@ -11,94 +13,148 @@ gregor@focusresearch.com
 Copyright (C) 1991-2004 Gregor N. Purdy
 All rights reserved.
 
-----------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+New features since 2.1:
+
+  * Now works on ix86 Linux (compiles without error, and its tests run)
+  * Removed redundant copies of source files in examples
+  * Ported -read: and -write: methods to use GCC's Objective-C runtime
+    functions (this will probably break on MacOS X -- we are going to
+    need to switch in different archiving code for MacOS X)
+
 
 New features since 2.0:
-    *   License is now GPL.
+
+  *   License is now GPL.
 
 
 New features since 1.1:
-    *	New extensible architecture separating pseudo-random bit
-    	generation from interpretation (as BOOL, double, etc.).
-    *	Additional engines: R250Engine, StandardEngine.
-    *	More efficient use of bits (see randMin:Max: in Random).
-    *	Better percent method (potentially non-portable, though. See
-    	Random).
-    *	More testing programs.
-    *	Two new graphical demos: RandPlot and RandHist.
+
+  * New extensible architecture separating pseudo-random bit
+    generation from interpretation (as BOOL, double, etc.).
+  * Additional engines: R250Engine, StandardEngine.
+  * More efficient use of bits (see randMin:Max: in Random).
+  * Better percent method (potentially non-portable, though. See
+    Random).
+  * More testing programs.
+  * Two new graphical demos: RandPlot and RandHist.
 
 
 New features since 1.0:
 
-    *	Gaussian variables;
-    *	Arbitrary distribution (via randFunc: method);
-    *	Nicer distribution policy;
-    *	Two neat histogram testing programs, one for flat distributions
-    	(from percent method), and one for Gaussian distributions (from
-	gaussian method).
+  * Gaussian variables;
+  * Arbitrary distribution (via randFunc: method);
+  * Nicer distribution policy;
+  * Two neat histogram testing programs, one for flat distributions
+    (from percent method), and one for Gaussian distributions (from
+    gaussian method).
 
 
 ----------------------------------------------------------------------
 
 ARCHITECTURE
 
-The architecture of the Random system is really fairly simple. The main departure from typical systems is that Random doesn't force you to use any one random number generator. This allows you the freedom to choose the tradeoffs you need to make for a given application between speed and degree of randomness.
+The architecture of RandomSystem is really fairly simple. The main departure
+from typical systems is that RandomSystem doesn't force you to use any one
+random number generator. This allows you the freedom to choose the tradeoffs
+you need to make for a given application between speed and degree of randomness.
 
-To allow you to use whatever pseudo-random number generation algorithm you choose, Random provides an abstract superclass called RandomEngine. Any time you instantiate a Random instance or an instance of one of its subclasses, you either specify a subclass of RandomEngine or RandomEngine itself as the class of generator to use, or you can specify an instance of one of these classes. Any operation you perform through the Random instance will then use the random number generator you provided.
+To allow you to use whatever pseudo-random number generation algorithm you
+choose, RandomSystem provides an abstract superclass called RandomEngine. Any
+time you instantiate a Random instance or an instance of one of its subclasses,
+you either specify a subclass of RandomEngine or RandomEngine itself as the
+class of generator to use, or you can specify an instance of one of these
+classes. Any operation you perform through the Random instance will then use the
+random number generation engine you provided.
 
-The random class keeps two data buffers: One for bits and one for bytes. When the Random instance is initialized, the buffers are filled with the generator's output, whatever size that may be. Then, during usage, byte-sized chunks of random bits are used from the byte buffer, and bit-sized chunks are used from the bit buffer. This means that it is less expensive to ask for a boolean value than it is to ask for some 32-bit quantity, since the bit comes from the bit buffer, instead of the byte buffer.
+The Random class keeps two data buffers: One for bits and one for bytes. When
+the Random instance is initialized, the buffers are filled with the generator's
+output, whatever size that may be. Then, during usage, byte-sized chunks of
+random bits are used from the byte buffer, and bit-sized chunks are used from
+the bit buffer. This means that it is less expensive to ask for a boolean value
+than it is to ask for some 32-bit quantity, since the bit comes from the bit
+buffer, instead of the byte buffer.
 
-Another feature of the Random class is that the percent method fills its result double with 52 random bits for the fraction, instead of starting with a random 32 bit quantity and dividing by the maximum 32 bit value. This provides finer granularity in random floating-point values than was previously available.
+Another feature of the Random class is that the percent method fills its result
+double with 52 random bits for the fraction (mantissa), instead of starting
+with a random 32 bit quantity and dividing by the maximum 32 bit value. This
+provides finer granularity in random floating-point values than was previously
+available.
 
-All classes included in the Random System are capable of archiving themselves, just as you would expect from any other AppKit-compatible classes. This allows you to save the entire state of your random number geration system, without regard for the details of any of the implementations.
+All classes included in RandomSystem are capable of archiving themselves, just
+as you would expect from any other Objective-C classes. This allows you to save
+the entire state of your random number geration system, without regard for the
+details of any of the implementations.
 
-The interface for the RandomEngine class is very simple, and you will find it easy to implement your own random number generators. All you do is implement four methods in your new class.
+The interface for the RandomEngine class is very simple, and you will find it
+easy to implement your own random number generators. All you do is implement
+four methods in your new class.
 
-The class method +unit is used by Random to determine how large its buffers should be. Whatever the natural size of the value your generator makes (in multiples of whole bytes), just have +unit return it.
+The class method +unit is used by Random to determine how large its buffers
+should be. Whatever the natural size of the value your generator makes (in
+multiples of whole bytes), just have +unit return it.
 
-Implement the -makeRandom: instance method to do whatever is necessary to generate the next value in the sequence and stuff it into the buffer location provided.
+Implement the -makeRandom: instance method to do whatever is necessary to
+generate the next value in the sequence and stuff it into the buffer location
+provided.
 
-Implement the -read: and -write: methods for archiving, so your class can save and restore its state.
+Implement the -read: and -write: methods for archiving, so your class can save
+and restore its state.
 
 
 ----------------------------------------------------------------------
 
 TESTS
 
-Included in the Random distribution are four test programs. A quick description of each is included below.
+Included in the RandomSystem distribution are four test programs. A quick
+description of each is included below.
+
 
 TestArchive
 
-This program exercises the Random classes by putting each RandomEngine subclass through the following test: Generate 1000 random percentages; archive to a file; generate and save in an array 1000 more; read the engine back in from the file; generate 1000 more random percentages and compare them to those saved in the array.
+This program exercises the RandomSystem classes by putting each RandomEngine
+subclass through the following test: Generate 1000 random percentages; archive
+to a file; generate and save in an array 1000 more; read the engine back in
+from the file; generate 1000 more random percentages and compare them to those
+saved in the array.
+
 
 TestDieRoller
 
-This program exercises the Random classes by making them generate a number of 20-sided-die rolls , and prints a summary of the results. It only uses the ElkinsEngine.
+This program exercises the RandomSystem classes by making them generate a
+number of 20-sided-die rolls and prints a summary of the results. It only uses
+the ElkinsEngine.
+
 
 TestGaussian
 
-This program exercises the Random classes by making them generate a number of gaussian variables, and graphs a (textual) histogram of the results.
+This program exercises the RandomSystem classes by making them generate a
+number of Gaussian variables, and graphs a (textual) histogram of the results.
+
 
 TestPercent
 
-This program exercises the Random classes by making them generate a number of percentages (values between 0.0 and 1.0, inclusive), and graphs a (textual) histogram of the results.
+This program exercises the RandomSystem classes by making them generate a
+number of percentages (values between 0.0 and 1.0, inclusive), and graphs a
+(textual) histogram of the results.
 
 
-----------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 LICENSE
 
-    Random is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
+RandomSystem is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
-    Random is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+RandomSystem is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Random; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+You should have received a copy of the GNU General Public License
+along with RandomSystem; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
